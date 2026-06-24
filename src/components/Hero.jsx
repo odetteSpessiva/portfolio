@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
 
         <h1 className="hero__name">
-          Hi, I'm <span className="hero__name-highlight">Chisa</span>
+          Hi, I'm <span className="hero__name-highlight">Hoang Nam</span>
         </h1>
 
         <p className="hero__role">
@@ -78,7 +78,7 @@ export default function Hero() {
           </button>
           <a
             className="btn btn--ghost"
-            href="https://github.com/chisa"
+            href="https://github.com/ThisIsNotNam"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -86,11 +86,11 @@ export default function Hero() {
           </a>
           <a
             className="btn btn--ghost"
-            href="https://codeforces.com"
+            href="https://discord.com/users/1235584744964620360"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Codeforces
+            Discord
           </a>
         </div>
       </div>
