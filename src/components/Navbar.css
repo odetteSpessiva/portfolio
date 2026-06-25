@@ -13,7 +13,7 @@
 }
 
 .navbar--scrolled {
-  background: rgba(13, 17, 23, 0.92);
+  background: rgba(8, 5, 8, 0.92);
   backdrop-filter: blur(12px);
   border-bottom-color: var(--border);
 }
@@ -31,7 +31,7 @@
   font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 700;
-  color: var(--cyan);
+  color: var(--crimson-bright);
   background: none;
   border: none;
   letter-spacing: 0.04em;
@@ -68,7 +68,7 @@
 }
 
 .navbar__link--active {
-  color: var(--cyan);
+  color: var(--crimson-bright);
 }
 
 .navbar__hamburger {
@@ -118,7 +118,7 @@
 }
 
 .navbar__mobile-link:hover {
-  color: var(--cyan);
+  color: var(--crimson-bright);
 }
 
 @media (max-width: 640px) {

@@ -41,14 +41,14 @@
 }
 
 .about__stat:hover {
-  border-color: var(--cyan-glow);
+  border-color: var(--crimson-glow);
 }
 
-.about__stat-value {
+.about__stat-label {
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--cyan);
+  color: var(--crimson-bright);
 }
 
 .about__stat-sub {
@@ -57,7 +57,7 @@
   color: var(--slate);
 }
 
-.about__stat-label {
+.about__stat-value {
   font-size: 0.75rem;
   color: var(--slate);
   text-transform: uppercase;

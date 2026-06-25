@@ -3,7 +3,7 @@ import useReveal from "../hooks/useReveal.js";
 import "./About.css";
 
 const HIGHLIGHTS = [
-  { label: "Competitions", value: "VOAI", sub: "2026 Finals" },
+  { label: "Focus", value: "Systems", sub: "& Web Dev" },
   { label: "Languages", value: "C++", sub: "& Python, JS" },
   { label: "Stacks", value: "Django", sub: "React, Docker" },
   { label: "Location", value: "Ha Tinh", sub: "Vietnam" },
@@ -34,26 +34,25 @@ export default function About() {
               linear-motion mechanism for a VEX V5 robot in Onshape.
             </p>
             <p>
-              I compete in algorithmic contests (VOAI, Codeforces) and treat
-              them the same way I treat every engineering problem: understand
-              the constraints, find the elegant solution, then make it actually
-              work in practice.
+              I approach every engineering problem the same way: understand the
+              constraints, find the elegant solution, then make it actually work
+              in practice. I care about the <em>why</em> behind systems, not
+              just the how.
             </p>
             <p>
-              When I'm not competing or shipping, I'm usually
-              reverse-engineering something interesting a scraper that needs
-              CAPTCHA solving, a judge system that needs WSL2/Docker networking
-              fixed, or an audio tampering detector built on transformer
-              attention.
+              When I'm not shipping, I'm usually reverse-engineering something
+              interesting, scraper that needs CAPTCHA solving, a judge system
+              that needs WSL2/Docker networking fixed, or an audio tampering
+              detector built on transformer attention.
             </p>
           </div>
 
           <div className="about__stats">
             {HIGHLIGHTS.map(({ label, value, sub }) => (
               <div className="about__stat" key={label}>
+                <span className="about__stat-label">{label}</span>
                 <span className="about__stat-value">{value}</span>
                 <span className="about__stat-sub">{sub}</span>
-                <span className="about__stat-label">{label}</span>
               </div>
             ))}
           </div>

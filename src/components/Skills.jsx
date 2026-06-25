@@ -4,28 +4,28 @@ import './Skills.css'
 
 const SKILL_GROUPS = [
   {
-    category: 'Algorithms & CP',
-    color: '#00F5D4',
+    category: 'Languages & Systems',
+    color: '#E8253A',
     items: [
-      { name: 'C++ (competitive)', level: 95 },
-      { name: 'Data Structures', level: 90 },
-      { name: 'Graph Algorithms', level: 85 },
-      { name: 'Dynamic Programming', level: 88 },
-    ],
-  },
-  {
-    category: 'Web & Backend',
-    color: '#7B8CDE',
-    items: [
-      { name: 'Django / Python', level: 88 },
-      { name: 'React / JS', level: 80 },
-      { name: 'Nginx + WSGI', level: 75 },
+      { name: 'C++', level: 92 },
+      { name: 'Python', level: 88 },
+      { name: 'JavaScript / TypeScript', level: 80 },
       { name: 'WebAssembly', level: 65 },
     ],
   },
   {
+    category: 'Web & Backend',
+    color: '#C8102E',
+    items: [
+      { name: 'Django / DRF', level: 88 },
+      { name: 'React', level: 80 },
+      { name: 'Nginx + WSGI', level: 75 },
+      { name: 'REST API Design', level: 82 },
+    ],
+  },
+  {
     category: 'DevOps & Infra',
-    color: '#F7A072',
+    color: '#A00020',
     items: [
       { name: 'Docker', level: 82 },
       { name: 'WSL2 / Linux', level: 85 },
@@ -35,7 +35,7 @@ const SKILL_GROUPS = [
   },
   {
     category: 'AI & ML',
-    color: '#E040FB',
+    color: '#FF4060',
     items: [
       { name: 'PyTorch', level: 75 },
       { name: 'CNN / Vision', level: 72 },

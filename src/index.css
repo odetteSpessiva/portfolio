@@ -5,16 +5,18 @@
 }
 
 :root {
-  --bg: #0D1117;
-  --bg-2: #161B27;
-  --bg-3: #1C2333;
-  --cyan: #00F5D4;
-  --cyan-dim: rgba(0, 245, 212, 0.12);
-  --cyan-glow: rgba(0, 245, 212, 0.3);
-  --white: #E8EAF0;
-  --slate: #8892A4;
-  --slate-light: #A8B2C4;
-  --border: rgba(255,255,255,0.07);
+  --bg: #080508;
+  --bg-2: #0F080C;
+  --bg-3: #180E12;
+  --crimson: #C8102E;
+  --crimson-dim: rgba(200, 16, 46, 0.12);
+  --crimson-glow: rgba(200, 16, 46, 0.4);
+  --crimson-bright: #E8253A;
+  --white: #EDE8EA;
+  --slate: #8A7A7E;
+  --slate-light: #B8A8AE;
+  --border: rgba(200, 16, 46, 0.14);
+  --border-subtle: rgba(255,255,255,0.05);
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
@@ -35,7 +37,7 @@ body {
 }
 
 ::selection {
-  background: var(--cyan);
+  background: var(--crimson);
   color: var(--bg);
 }
 
@@ -46,12 +48,13 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-3);
+  background: var(--crimson);
   border-radius: 2px;
+  opacity: 0.4;
 }
 
 a {
-  color: var(--cyan);
+  color: var(--crimson-bright);
   text-decoration: none;
 }
 
@@ -95,7 +98,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--crimson-bright);
   margin-bottom: 0.75rem;
 }
 
@@ -108,8 +111,13 @@ button {
   color: var(--white);
 }
 
+.text-crimson {
+  color: var(--crimson-bright);
+}
+
+/* keep legacy alias */
 .text-cyan {
-  color: var(--cyan);
+  color: var(--crimson-bright);
 }
 
 .section:nth-child(even) {

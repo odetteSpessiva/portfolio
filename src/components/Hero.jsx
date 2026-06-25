@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import "./Hero.css";
 
 const ROLES = [
-  "competitive programmer",
   "full-stack developer",
   "robotics engineer",
   "deep learning tinkerer",
   "open-source builder",
+  "systems engineer",
 ];
 
 export default function Hero() {
@@ -67,7 +67,7 @@ export default function Hero() {
         </p>
 
         <p className="hero__bio">
-          Building things from scratch competitive algorithms, web systems, and
+          Building things from scratch: web systems, robotics, AI pipelines, and
           everything in between. Fuelled by curiosity about <em>why</em> things
           work the way they do.
         </p>

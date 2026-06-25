@@ -16,7 +16,7 @@
 .footer__logo {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--cyan);
+  color: var(--crimson-bright);
   font-weight: 700;
 }
 

@@ -19,6 +19,19 @@
   pointer-events: none;
 }
 
+/* Blood-red radial glow behind content */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(200, 16, 46, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .hero__inner {
   max-width: 760px;
   width: 100%;
@@ -45,13 +58,13 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--crimson);
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--crimson-glow); }
+  50% { opacity: 0.6; box-shadow: 0 0 8px 3px var(--crimson-glow); }
 }
 
 .hero__name {
@@ -65,7 +78,7 @@
 }
 
 .hero__name-highlight {
-  color: var(--cyan);
+  color: var(--crimson-bright);
   position: relative;
 }
 
@@ -90,7 +103,7 @@
 }
 
 .hero__cursor {
-  color: var(--cyan);
+  color: var(--crimson);
   animation: blink 1.1s step-start infinite;
   font-weight: 700;
 }
@@ -133,14 +146,14 @@
 }
 
 .btn--primary {
-  background: var(--cyan);
-  color: var(--bg);
+  background: var(--crimson);
+  color: var(--white);
 }
 
 .btn--primary:hover {
-  background: #00e0c0;
+  background: var(--crimson-bright);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px var(--cyan-glow);
+  box-shadow: 0 4px 24px var(--crimson-glow);
   text-decoration: none;
 }
 
@@ -152,8 +165,8 @@
 
 .btn--ghost:hover {
   color: var(--white);
-  border-color: rgba(255,255,255,0.2);
-  background: var(--bg-3);
+  border-color: var(--crimson);
+  background: var(--crimson-dim);
   transform: translateY(-1px);
   text-decoration: none;
 }
