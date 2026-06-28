@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "build:main": "vite build",
+    "build:sub": "cd theguides && npm run build",
+    "build": "npm run build:main && npm run build:sub",
+    "lint": "oxlint"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",
