@@ -1,0 +1,146 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:               #080508;
+  --bg-2:             #0F080C;
+  --bg-3:             #180E12;
+  --crimson:          #C8102E;
+  --crimson-dim:      rgba(200, 16, 46, 0.12);
+  --crimson-glow:     rgba(200, 16, 46, 0.4);
+  --crimson-bright:   #E8253A;
+  /* TGT accent: electric violet layered over crimson base */
+  --accent:           #9333EA;
+  --accent-dim:       rgba(147, 51, 234, 0.12);
+  --accent-glow:      rgba(147, 51, 234, 0.35);
+  --accent-bright:    #A855F7;
+  --white:            #EDE8EA;
+  --slate:            #8A7A7E;
+  --slate-light:      #B8A8AE;
+  --border:           rgba(200, 16, 46, 0.14);
+  --border-accent:    rgba(147, 51, 234, 0.2);
+  --border-subtle:    rgba(255,255,255,0.05);
+  --font-display:     'Space Grotesk', sans-serif;
+  --font-body:        'Inter', sans-serif;
+  --font-mono:        'Space Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+a { color: var(--accent-bright); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { cursor: pointer; font-family: var(--font-display); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Shared section styles ── */
+.section {
+  padding: 100px 2rem;
+}
+
+.section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.section__inner.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  margin-bottom: 0.75rem;
+}
+
+.section__heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.section:nth-child(even) {
+  background: var(--bg-2);
+}
+
+/* ── Shared button styles ── */
+.btn {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--accent-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 24px var(--accent-glow);
+  text-decoration: none;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--slate-light);
+  border: 1px solid var(--border-accent);
+}
+
+.btn--ghost:hover {
+  color: var(--white);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  transform: translateY(-1px);
+  text-decoration: none;
+}

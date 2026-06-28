@@ -1,0 +1,139 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 2rem 80px;
+  overflow: hidden;
+}
+
+/* Grid background — same as main portfolio */
+.hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border-accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-accent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+  pointer-events: none;
+}
+
+/* Signature: diagonal slash fills right half */
+.hero__slash {
+  position: absolute;
+  top: -20%; right: -5%;
+  width: 60%; height: 160%;
+  background: linear-gradient(135deg, var(--accent), var(--crimson));
+  opacity: 0.06;
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+
+/* Thin accent line along the slash edge */
+.hero__slash-line {
+  position: absolute;
+  top: -20%; right: calc(55% - 5%);
+  width: 2px; height: 160%;
+  background: linear-gradient(180deg, transparent, var(--accent), var(--crimson), transparent);
+  opacity: 0.3;
+  transform: skewX(-12deg);
+  pointer-events: none;
+}
+
+/* Ambient glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 20%; left: 30%;
+  transform: translateX(-50%);
+  width: 600px; height: 350px;
+  background: radial-gradient(ellipse, rgba(147, 51, 234, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  max-width: 760px;
+  width: 100%;
+  z-index: 1;
+}
+
+.hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-accent);
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+  background: var(--bg-2);
+}
+
+.hero__tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%       { opacity: 0.6; box-shadow: 0 0 8px 3px var(--accent-glow); }
+}
+
+.hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--white);
+}
+
+.hero__heading-accent {
+  color: var(--accent-bright);
+  position: relative;
+}
+
+.hero__bio {
+  font-size: 1.05rem;
+  color: var(--slate-light);
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  line-height: 1.75;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+.hero__scroll-arrow {
+  display: block;
+  width: 20px; height: 20px;
+  border-right: 2px solid var(--slate);
+  border-bottom: 2px solid var(--slate);
+  transform: rotate(45deg);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50%       { transform: rotate(45deg) translateY(4px); opacity: 1; }
+}
