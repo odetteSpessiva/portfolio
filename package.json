@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:tkb": "cd tkb && npm run dev",
     "build:main": "vite build",
     "build:sub": "cd theguides && npm run build",
-    "build": "npm run build:main && npm run build:sub",
+    "build:tkb": "cd tkb && npm run build",
+    "build": "npm run build:main && npm run build:sub && npm run build:tkb",
     "lint": "oxlint"
   },
   "dependencies": {
