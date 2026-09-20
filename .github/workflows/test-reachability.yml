@@ -1,0 +1,11 @@
+name: Test Reachability
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl School Server
+        run: curl -i -m 10 https://thptchuyen.hatinh.edu.vn/hoc-tap/thoi-khoa-bieu
