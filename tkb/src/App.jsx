@@ -3,94 +3,32 @@ import "./App.css";
 
 const BASE_URL = "https://thptchuyen.hatinh.edu.vn";
 const DISCOVERY_URL = `${BASE_URL}/hoc-tap/thoi-khoa-bieu`;
-
-const CORS_PROXY = "https://api.allorigins.win/raw?url=";
-
-function textContent(element) {
-  return element.textContent.replace(/\s+/g, " ").trim();
-}
-
-async function fetchHtml(url) {
-  if (
-    import.meta.env.DEV ||
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1"
-  ) {
-    const target = new URL(url);
-    const response = await fetch(
-      `/school-api${target.pathname}${target.search}`,
-    );
-    if (!response.ok)
-      throw new Error("Không thể kết nối tới máy chủ của trường.");
-    return response.text();
-  }
-
-  try {
-    const response = await fetch(url);
-    if (response.ok) return response.text();
-  } catch {
-    // The school host does not allow direct requests from static hosting.
-  }
-
-  const proxyResponse = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
-  if (!proxyResponse.ok)
-    throw new Error("Không thể kết nối tới máy chủ của trường.");
-  return proxyResponse.text();
-}
+const TKB_JSON_URL =
+  "https://raw.githubusercontent.com/odetteSpessiva/portfolio/main/tkb/data/tkb.json";
 
 async function fetchTimetable() {
-  const discoveryDocument = new DOMParser().parseFromString(
-    await fetchHtml(DISCOVERY_URL),
-    "text/html",
-  );
-  const detailLink = discoveryDocument.querySelector(
-    "section#section18 a[href]",
-  );
-  if (!detailLink) throw new Error("Không tìm thấy thời khóa biểu mới nhất.");
+  const response = await fetch(`${TKB_JSON_URL}?t=${Date.now()}`);
+  if (!response.ok) {
+    throw new Error("Không thể tải dữ liệu thời khóa biểu mới nhất.");
+  }
+  const document = await response.json();
+  if (
+    !document ||
+    !Array.isArray(document.rows) ||
+    !document.rows.every((row) => Array.isArray(row))
+  ) {
+    throw new Error("Dữ liệu thời khóa biểu không đúng định dạng.");
+  }
 
-  const detailUrl = new URL(detailLink.getAttribute("href"), BASE_URL).href;
-  const detailDocument = new DOMParser().parseFromString(
-    await fetchHtml(detailUrl),
-    "text/html",
-  );
-  const frame = detailDocument.querySelector("iframe#iframe18_18[src]");
-  if (!frame) throw new Error("Không tìm thấy dữ liệu thời khóa biểu.");
-
-  const frameUrl = new URL(frame.getAttribute("src"), detailUrl).href;
-  const indexDocument = new DOMParser().parseFromString(
-    await fetchHtml(frameUrl),
-    "text/html",
-  );
-  if (!indexDocument.body)
-    throw new Error("Không tìm thấy dữ liệu thời khóa biểu.");
-
-  const tableUrl = new URL("tkb_class_19_0.html", frameUrl).href;
-  const tableDocument = new DOMParser().parseFromString(
-    await fetchHtml(tableUrl),
-    "text/html",
-  );
-
-  const match = tableDocument.body.textContent.match(
-    /TKB có tác dụng từ:\s*(\d{2}\/\d{2}\/\d{4})/,
-  );
-  const date = match ? match[1] : null;
-
-  const table = tableDocument.querySelector("table.cls-tblTKB, table");
-  if (!table) throw new Error("Dữ liệu thời khóa biểu không đúng định dạng.");
-
-  const rows = [...table.querySelectorAll("tr")].map((row) =>
-    [...row.querySelectorAll("th, td")].map(textContent),
-  );
+  const rows = document.rows;
   rows[0][0] = "Tiết";
-  const title = textContent(tableDocument.querySelector("p font"));
-  const className = title.match(/lớp:\s*([^\-]+)/i)?.[1]?.trim() || "";
 
   return {
     rows,
-    title: title || "Thời khóa biểu",
-    className,
-    date,
-    source: tableUrl,
+    title: document.title || "Thời khóa biểu",
+    className: document.className || "",
+    date: document.date || "",
+    source: document.source || TKB_JSON_URL,
   };
 }
 
@@ -155,9 +93,6 @@ function App() {
         <span className="topbar__meta">
           {data?.className} THPT CHUYÊN HÀ TĨNH
         </span>
-        <a className="back-link" href="../theguides/">
-          the guides ↗
-        </a>
       </header>
       {loading && <Loading />}
       {!loading && error && <ErrorState message={error} onRetry={load} />}
@@ -169,16 +104,10 @@ function App() {
               <div className="page-title">
                 Thời khóa biểu<span>.</span>
               </div>
-              <p className="subtitle">{data.className} · {data.date}</p>
+              <p className="subtitle">
+                {data.className} · {data.date}
+              </p>
             </div>
-            <button
-              className="refresh"
-              type="button"
-              onClick={load}
-              aria-label="Cập nhật thời khóa biểu"
-            >
-              ↻ <span>Cập nhật</span>
-            </button>
           </div>
           <section
             className="table-shell"
