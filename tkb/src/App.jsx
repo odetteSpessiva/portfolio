@@ -1,3 +1,4 @@
+import { Moon, Sun } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
@@ -5,6 +6,31 @@ const BASE_URL = "https://thptchuyen.hatinh.edu.vn";
 const DISCOVERY_URL = `${BASE_URL}/hoc-tap/thoi-khoa-bieu`;
 const TKB_JSON_URL =
   "https://raw.githubusercontent.com/odetteSpessiva/portfolio/main/tkb/data/tkb.json";
+const THEME_STORAGE_KEY = "tkb-theme";
+const SCHOOL_DAY_END_HOUR = 12;
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function getHighlightedDay() {
+  const now = new Date();
+  const weekday = now.getDay();
+  if (
+    weekday === 0 ||
+    (weekday === 6 && now.getHours() >= SCHOOL_DAY_END_HOUR)
+  ) {
+    return 1;
+  }
+  if (now.getHours() < SCHOOL_DAY_END_HOUR) {
+    return weekday;
+  }
+  return weekday + 1;
+}
 
 async function fetchTimetable() {
   const response = await fetch(`${TKB_JSON_URL}?t=${Date.now()}`);
@@ -67,6 +93,8 @@ function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [highlightedDay, setHighlightedDay] = useState(getHighlightedDay);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -84,8 +112,23 @@ function App() {
     load();
   }, [load]);
 
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setHighlightedDay(getHighlightedDay());
+    }, 60_000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  function toggleTheme() {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+      return nextTheme;
+    });
+  }
+
   return (
-    <div className="page">
+    <div className="page" data-theme={theme}>
       <header className="topbar">
         <a className="brand" href="../">
           [<span>tkb</span>]
@@ -93,6 +136,18 @@ function App() {
         <span className="topbar__meta">
           {data?.className} THPT CHUYÊN HÀ TĨNH
         </span>
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={toggleTheme}
+          aria-label={`Chuyển sang giao diện ${
+            theme === "dark" ? "sáng" : "tối"
+          }`}
+        >
+          <span className="theme-toggle__icon" aria-hidden="true">
+            {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+          </span>
+        </button>
       </header>
       {loading && <Loading />}
       {!loading && error && <ErrorState message={error} onRetry={load} />}
@@ -100,13 +155,11 @@ function App() {
         <main className="content">
           <div className="heading">
             <div>
-              <p className="eyebrow">LỊCH HỌC / CẬP NHẬT TRỰC TIẾP</p>
+              <p className="eyebrow">THỜI KHÓA BIỂU / THPT CHUYÊN HÀ TĨNH</p>
               <div className="page-title">
-                Thời khóa biểu<span>.</span>
+                {data.className || "Thời khóa biểu"}
+                {data.date && <span> · {data.date}</span>}
               </div>
-              <p className="subtitle">
-                {data.className} · {data.date}
-              </p>
             </div>
           </div>
           <section
@@ -120,11 +173,14 @@ function App() {
                     <tr key={`${rowIndex}-${row.join("-")}`}>
                       {row.map((cell, cellIndex) => (
                         <td
-                          className={
+                          className={[
                             rowIndex === 0 || cellIndex === 0
                               ? "is-heading"
-                              : ""
-                          }
+                              : "",
+                            cellIndex === highlightedDay && "is-current-day",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
                           key={`${cellIndex}-${cell}`}
                         >
                           {cell || <span className="empty">—</span>}

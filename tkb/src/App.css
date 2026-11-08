@@ -1,210 +1,280 @@
 .page {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 80% 0%, #1d3b32 0, transparent 28rem), #0d1110;
+  --page-background: #eef4f7;
+  --text: #1d2930;
+  --muted: #667780;
+  --border: #cbd9df;
+  --table-border: #d4e0e5;
+  --table-background: #f9fcfd;
+  --heading-background: #e4eef2;
+  --accent: #3d7ea6;
+  --empty: #98aab2;
+  background: var(--page-background);
+  color: var(--text);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
+
+.page[data-theme="dark"] {
+  --page-background: #1c1f29;
+  --text: #eaebf1;
+  --muted: #adb0bc;
+  --border: #424550;
+  --table-border: #383b46;
+  --table-background: #252934;
+  --heading-background: #313541;
+  --accent: #83b9d8;
+  --empty: #71858f;
+}
+
 .topbar {
-  height: 76px;
+  height: 72px;
   max-width: 1240px;
   margin: auto;
   padding: 0 32px;
   display: flex;
   align-items: center;
-  gap: 28px;
-  border-bottom: 1px solid #25322e;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
 }
+
 .brand {
   font:
     700 1rem "DM Mono",
     monospace;
-  color: #9de6b5;
+  color: var(--accent);
   letter-spacing: 0.08em;
 }
-.brand span {
-  color: #f2ede8;
+
+.brand span,
+.page-title {
+  color: var(--text);
 }
+
 .topbar__meta,
 .eyebrow,
 .state__code {
   font:
     500 0.68rem "DM Mono",
     monospace;
-  letter-spacing: 0.14em;
-  color: #7f9389;
+  letter-spacing: 0.12em;
+  color: var(--muted);
 }
-.back-link {
+
+.theme-toggle {
   margin-left: auto;
-  color: #b5c7bd;
-  font-size: 0.8rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 5px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
 }
+
+.theme-toggle__icon {
+  display: grid;
+  transition:
+    transform 220ms ease,
+    opacity 160ms ease;
+}
+
+.theme-toggle:hover .theme-toggle__icon {
+  transform: rotate(20deg) scale(1.12);
+}
+
+.theme-toggle:active .theme-toggle__icon {
+  transform: rotate(-20deg) scale(0.92);
+}
+
 .content {
   max-width: 1240px;
   margin: auto;
-  padding: 84px 32px 56px;
+  padding: 76px 32px 56px;
 }
+
 .heading {
   display: flex;
   justify-content: space-between;
   align-items: end;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
+
 .eyebrow {
-  color: #9de6b5;
-  margin: 0 0 18px;
+  color: var(--accent);
+  margin: 0 0 16px;
 }
+
 .page-title {
   margin: 0;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(2rem, 3vw, 2.8rem);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   font-weight: 700;
 }
+
 .page-title span {
-  color: #9de6b5;
+  color: var(--accent);
 }
-.subtitle {
-  margin: 22px 0 0;
-  color: #91a39a;
-  font-size: 0.95rem;
-}
-.refresh,
-.state button {
-  border: 1px solid #3d6650;
-  background: #14241c;
-  color: #b8f0c8;
-  padding: 11px 16px;
-  cursor: pointer;
-}
-.refresh {
-  white-space: nowrap;
-}
-.refresh:hover,
-.state button:hover {
-  background: #1e382a;
-}
+
 .table-shell {
-  border: 1px solid #34463e;
-  background: rgba(16, 25, 21, 0.84);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  border: 1px solid var(--border);
+  background: var(--table-background);
 }
+
 .table-scroll {
   overflow-x: auto;
 }
+
 table {
   border-collapse: collapse;
   width: 100%;
   min-width: 760px;
   table-layout: fixed;
 }
+
 td {
-  border: 1px solid #2a3a33;
+  border: 1px solid var(--table-border);
   padding: 18px 12px;
   min-width: 110px;
   text-align: center;
-  color: #d2ddd6;
-  font-size: 0.87rem;
+  color: var(--text);
+  font-size: 0.94rem;
   vertical-align: middle;
 }
+
 td:first-child {
   width: 64px;
 }
+
 td.is-heading {
-  background: #173128;
-  color: #b8f0c8;
+  background: var(--heading-background);
+  color: var(--text);
   font:
-    500 0.76rem "DM Mono",
+    500 0.8rem "DM Mono",
     monospace;
 }
+
+td.is-current-day {
+  background: color-mix(in srgb, var(--accent) 10%, var(--table-background));
+  box-shadow: inset 2px 0 var(--accent), inset -2px 0 var(--accent);
+}
+
 tr:first-child td {
   padding: 15px 10px;
+  border-bottom-color: var(--accent);
 }
+
 .empty {
-  color: #53665b;
+  color: var(--empty);
 }
+
 .table-footer {
   display: flex;
   justify-content: space-between;
   gap: 16px;
   padding: 16px 20px;
-  color: #71847a;
+  color: var(--muted);
   font:
-    0.7rem "DM Mono",
+    0.72rem "DM Mono",
     monospace;
 }
-.table-footer a {
-  color: #9de6b5;
+
+.table-footer a,
+.source-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
+
 .state {
-  min-height: calc(100vh - 76px);
+  min-height: calc(100vh - 72px);
   display: grid;
   place-content: center;
   justify-items: center;
   text-align: center;
   padding: 32px;
 }
+
 .state p {
-  color: #b5c7bd;
+  color: var(--muted);
   margin: 24px 0 8px;
 }
+
 .state small {
-  color: #71847a;
+  color: var(--muted);
 }
+
 .loader {
-  width: 42px;
-  height: 42px;
-  border: 2px solid #284235;
-  border-top-color: #9de6b5;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
+
 .state--error {
   justify-items: start;
   text-align: left;
   max-width: 600px;
   margin: auto;
 }
+
 .state__title {
   margin-top: 18px;
-  font-size: 1.5rem;
+  color: var(--text);
+  font-size: 1.55rem;
   line-height: 1.2;
   font-weight: 700;
 }
+
 .state--error p {
   line-height: 1.7;
   margin: 18px 0 24px;
 }
+
+.state--error button {
+  border: 1px solid var(--accent);
+  padding: 9px 13px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+
 .source-link {
   margin-top: 18px;
-  color: #9de6b5;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
 }
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
+
 @media (max-width: 640px) {
   .topbar {
     padding: 0 20px;
     gap: 16px;
   }
+
   .topbar__meta {
     display: none;
   }
+
   .content {
     padding: 56px 20px 32px;
   }
+
   .heading {
     align-items: start;
     flex-direction: column;
   }
-  .refresh {
-    align-self: stretch;
-  }
-  .refresh span {
-    margin-left: 6px;
-  }
+
   td {
     padding: 16px 10px;
   }
