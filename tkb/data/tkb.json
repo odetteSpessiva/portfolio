@@ -1,0 +1,60 @@
+{
+  "rows": [
+    [
+      "Tiết",
+      "Thứ 2",
+      "Thứ 3",
+      "Thứ 4",
+      "Thứ 5",
+      "Thứ 6",
+      "Thứ 7"
+    ],
+    [
+      1,
+      "CHAOCO",
+      "Giáo dục thể chất",
+      "Giáo dục thể chất",
+      "Toán",
+      "Lịch sử",
+      "Ngữ văn"
+    ],
+    [
+      2,
+      "Tin học",
+      "Tiếng Anh",
+      "Vật lý",
+      "Toán",
+      "Sinh học",
+      "Ngữ văn"
+    ],
+    [
+      3,
+      "Ngữ văn",
+      "Tin học",
+      "Sinh học",
+      "Vật lý",
+      "Hóa học",
+      "TN HN"
+    ],
+    [
+      4,
+      "Tiếng Anh",
+      "Vật lý",
+      "Toán",
+      "Hóa học",
+      "Tin học",
+      "Tin học"
+    ],
+    [
+      5,
+      "Tiếng Anh",
+      "",
+      "Toán",
+      "",
+      "Tin học",
+      "SH/TNHN"
+    ]
+  ],
+  "updatedAt": "2026-11-08T14:01:21.193934+00:00",
+  "source": "https://thptchuyen.hatinh.edu.vn/upload/51504/20261025/6add686af99272c764007416e1c068/5._TKB_HK1_26-10-2026/tkb_class_19_0.html"
+}
